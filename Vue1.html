@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    ul,li{
+        list-style-type: none;
+    }
+    img{
+        width: 550px;
+        height: 270px;
+    }
+</style>
+<body>
+    <div id="app">
+        <button @click="sub">
+            -
+        </button>
+        <span>{{ num }}</span>
+        <button @click="add">
+            +
+        </button>
+    </div>
+    <div id="img">
+        <input type="button" value="显示状态" @click="changeIsShow">
+        <input type="button" value="增加年龄" @click="addage">
+        <input type="button" value="减小年龄" @click="subage">
+        <img src="../4K/深圳夜景4k壁纸_彼岸图网.jpg" alt="" v-show="isShow">
+        <img src="../4K/1581300644933.jpeg" alt="" v-show="age>=18">
+        <input type="button" value="显示状态" @click="changeIsShow">
+    </div>
+    <div id="if">
+        <input type="button" @click="toggleIsShow" value="123">
+        <p v-if="isShow">My name is GTR</p>
+        <h2 v-if="temperature>=35">It's too hot.</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function () {
+                    if(this.num<10)
+                        this.num++;
+                },
+                sub:function () {
+                    if(this.num>0)
+                        this.num--;
+                }
+            }
+        });
+        var img = new Vue({
+            el:"#img",
+            data:{
+                isShow:true,
+                age:17
+            },
+            methods: {
+                changeIsShow:function () {
+                    this.isShow = !this.isShow;
+                },
+                addage:function () {
+                    this.age++;
+                },
+                subage:function () {
+                    this.age--;
+                }
+            }
+        });
+        var if1 = new Vue({
+            el:"#if",
+            data:{
+                isShow:false,
+                temperature:33
+            },
+            methods:{
+                toggleIsShow:function () {
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

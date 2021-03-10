@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 1500px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <img :src="imgArr[index]" alt="">
+        <a href="#" v-show="index!==0" @click="pre"><</a>
+        <a href="#" v-show="index<imgArr.length-1" @click="next">></a>
+    </div>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                imgArr:[
+                    "../4K/1581300644933.jpeg",
+                    "../4K/公孙离-无限星赏官 王者荣耀4k壁纸3840x2160_彼岸图网.jpg",
+                    "../4K/地球 月球 过境 星系8K壁纸(7680x4320)_彼岸图网.jpg"
+                ],
+                index:0,
+            },
+            methods:{
+                pre:function () {
+                    this.index--;
+                },
+                next:function () {
+                    this.index++;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

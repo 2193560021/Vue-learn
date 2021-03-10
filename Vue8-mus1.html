@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="wrap">
+    <div class="play_wrap" id="player">
+        <div class="search_bar">
+            <input type="text" v-model="query" @keyup.enter="searchMusic" autocomplete="off">
+        </div>
+        <div class="center_con">
+            <div class="song_wrapper">
+                    <ul class="song_list">
+                        <li v-for="item in musicList">
+                            <a href="javascript:;" @click="playMusic(item.id)">
+                            <b>{{ item.name }}</b>
+                            <span><i>
+
+                            </i></span>
+                        </a></li>
+                    </ul>
+            </div>
+        </div>
+        <div class="audio_con">
+            <audio controls="controls" autoplay="autoplay" loop="loop" :src="musicUrl"></audio>
+        </div>
+    </div>
+</div>
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#player",
+            data:{
+                query:"",
+                musicList:[],
+                musicUrl:[]
+            },
+            methods:{
+                searchMusic:function () {
+                    var that = this;
+                    axios.get("https://autumnfish.cn/search?keywords=" + this.query)
+                        .then(function (response) {
+                            that.musicList = response.data.result.songs;
+                            console.log(response.data.result.songs)
+                        }),function (err) {
+                    }
+                },
+                playMusic:function (musicId) {
+                    var that = this;
+                    // console.log(musicId);
+                    axios.get("https://autumnfish.cn/song/url?id=" + musicId)
+                        .then(function (response) {
+                            // console.log(response);
+                            console.log(response.data.data[0].url);
+                            that.musicUrl = response.data.data[0].url;
+                        }),function (err) {
+
+                    }
+                }
+
+            }
+        });
+    </script>
+</body>
+</html>

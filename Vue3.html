@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click="add" value="add">
+        <input type="button" @click="remove" value="remove">
+        <ul>
+            <li v-for="(item,index) in arr" :title="item">
+                {{index}}{{item}}
+            </li>
+            <li v-for="ut in objArr">
+                {{ut.name}}
+            </li>
+        </ul>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3,4,5],
+                objArr:[
+                    {name:"lyy"},
+                    {name: "ly"}
+                ]
+            },
+            methods:{
+                add:function () {
+                    this.objArr.push({name:"qwer"});
+                },
+                remove:function () {
+                    this.objArr.shift();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
