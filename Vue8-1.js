@@ -2,8 +2,9 @@ var app = new Vue({
     el:"#player",
     data:{
         query:"",
-        musicList:[],
-        musicUrl:[]
+        musicList:[],       //歌曲数组
+        musicUrl:[],        //歌曲地址
+        musicPicUrl:[]      //封面
     },
     methods:{
         searchMusic:function () {
@@ -20,13 +21,19 @@ var app = new Vue({
             // console.log(musicId);
             axios.get("https://autumnfish.cn/song/url?id=" + musicId)
                 .then(function (response) {
-                    // console.log(response);
-                    console.log(response.data.data[0].url);
                     that.musicUrl = response.data.data[0].url;
+                },function (err) {})
+            axios.get("https://autumnfish.cn/song/detail?ids=" + musicId)
+                .then(function (response) {
+                    that.musicPicUrl = response.data.songs[0].al.picUrl;
                 }),function (err) {
+            }
 
+            axios.get("https://autumnfish.cn/comment/hot?type=0&id=" + musicId)
+                .then(function (response) {
+                    that.musicPicUrl = response.data.songs[0].al.picUrl;
+                }),function (err) {
             }
         }
-
     }
 });

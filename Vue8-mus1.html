@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .wrap,.play_wrap{
+            width: 1000px;
+        }
+        .song_wrapper{
+            width: 400px;
+            float: left;
+        }
+        .center_con{
+            width: 200px;
+        }
+        .song{
+            float: right;
+            margin: auto;
+        }
+        .song img{
+            width: 200px;
+            height: 200px;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 <div class="wrap">
@@ -23,48 +44,21 @@
                     </ul>
             </div>
         </div>
-        <div class="audio_con">
-            <audio controls="controls" autoplay="autoplay" loop="loop" :src="musicUrl"></audio>
+        <div class="song">
+            <img src="../4K/FBC9E0C667A83C0BD1EAF73E77C50E6A.jpg" :src="musicPicUrl">
+            <div class="audio_con">
+                <audio controls="controls" autoplay="autoplay" loop="loop" :src="musicUrl"></audio>
+            </div>
         </div>
+
     </div>
 </div>
     <!--axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        var app = new Vue({
-            el:"#player",
-            data:{
-                query:"",
-                musicList:[],
-                musicUrl:[]
-            },
-            methods:{
-                searchMusic:function () {
-                    var that = this;
-                    axios.get("https://autumnfish.cn/search?keywords=" + this.query)
-                        .then(function (response) {
-                            that.musicList = response.data.result.songs;
-                            console.log(response.data.result.songs)
-                        }),function (err) {
-                    }
-                },
-                playMusic:function (musicId) {
-                    var that = this;
-                    // console.log(musicId);
-                    axios.get("https://autumnfish.cn/song/url?id=" + musicId)
-                        .then(function (response) {
-                            // console.log(response);
-                            console.log(response.data.data[0].url);
-                            that.musicUrl = response.data.data[0].url;
-                        }),function (err) {
+    <script src="Vue8-1.js">
 
-                    }
-                }
-
-            }
-        });
     </script>
 </body>
 </html>
