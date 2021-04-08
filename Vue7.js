@@ -6,12 +6,13 @@ var app = new Vue({
     },
     methods:{
         searchWeather:function () {
-            // console.log("天气查询");
-            // console.log(this.city)
+            console.log("天气查询");
+            console.log(this.city)
             var that = this;        //保存this
             axios.get('http://wthrcdn.etouch.cn/weather_mini?city='
             +this.city)
                 .then(function (response) {
+                    console.log(response);
                     that.weatherList = response.data.data.forecast
                 })
                 .catch(function (err) {
